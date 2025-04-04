@@ -30,7 +30,7 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * <a> <b> <div> <span> <em> <i> <p> <h1> <h2> <h3> <h4> <h5> <h6> <blockquote> <code> <pre> <ol> <ul> <li> <hr> <strong>
      *  若黑白名单一起配置，则只有白名单生效
      */
-    @Value("#{'${rtf.xss.validator.html.notAllowedTags:}'.split(',').![trim()]}")
+    @Value("#{'${rtf.xss.validator.html.onlySupportedTags:}'.split(',').![trim()]}")
     private Set<String> onlySupportedTags;
 
     /**
