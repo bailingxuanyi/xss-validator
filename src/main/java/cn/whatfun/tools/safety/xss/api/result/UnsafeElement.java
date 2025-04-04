@@ -1,4 +1,4 @@
-package cn.whatfun.tools.safety.xss.result;
+package cn.whatfun.tools.safety.xss.api.result;
 
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;

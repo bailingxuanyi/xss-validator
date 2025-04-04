@@ -1,11 +1,10 @@
 
 
-import cn.whatfun.tools.safety.xss.result.UnsafeElement;
-import cn.whatfun.tools.safety.xss.support.RtfTextXssValidator;
+import cn.whatfun.tools.safety.xss.api.result.UnsafeElement;
+import cn.whatfun.tools.safety.xss.impl.RtfTextXssValidator;
 import com.google.common.collect.Sets;
 
 import java.util.List;
-import java.util.Optional;
 
 public class XssValidatorTest {
 

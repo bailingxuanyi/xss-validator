@@ -1,8 +1,8 @@
-package cn.whatfun.tools.safety.xss.support;
+package cn.whatfun.tools.safety.xss.impl;
 
 
 import cn.whatfun.tools.safety.xss.api.XssValidator;
-import cn.whatfun.tools.safety.xss.result.UnsafeElement;
+import cn.whatfun.tools.safety.xss.api.result.UnsafeElement;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
