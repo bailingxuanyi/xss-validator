@@ -291,9 +291,9 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
     public void resetPattern() {
         try {
             this.dagerousWordsPattern = Pattern.compile(notAllowedAttrValueRegexExpression, Pattern.CASE_INSENSITIVE);
-            log.info("[Xss监测]notAllowedJsKeyWordsRegexPattern编译成功, notAllowedAttrValueRegexExpression:{}", notAllowedAttrValueRegexExpression);
+            log.info("[Xss检测]notAllowedJsKeyWordsRegexPattern编译成功, notAllowedAttrValueRegexExpression:{}", notAllowedAttrValueRegexExpression);
         } catch (Exception e) {
-            log.error("[Xss监测] notAllowedJsKeyWordsRegexPattern编译失败 notAllowedJsKeyWordsRegexPattern:{}", notAllowedAttrValueRegexExpression);
+            log.error("[Xss检测] notAllowedJsKeyWordsRegexPattern编译失败 notAllowedJsKeyWordsRegexPattern:{}", notAllowedAttrValueRegexExpression);
         }
     }
 
