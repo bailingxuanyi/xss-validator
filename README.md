@@ -43,6 +43,7 @@
 
 
 ### 6. 流程图
+```mermaid
 flowchart TD
     A[开始] --> B[XssValidator.validate]
     B --> C[Jsoup解析Document]
@@ -56,3 +57,4 @@ flowchart TD
     H -->|否| D
     F --> D
     D -->|遍历结束| I[返回危险节点数组]
+```
