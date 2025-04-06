@@ -43,7 +43,7 @@
 
 
 ### 6. 流程图
-```mermaid
+flowchart TD
     A[开始] --> B[XssValidator.validate]
     B --> C[Jsoup解析Document]
     C --> D[遍历所有Node]
