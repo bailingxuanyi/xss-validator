@@ -43,24 +43,20 @@
 
 
 ### 6. 流程图
-# XSS 验证流程图
-
 ```mermaid
 graph TD
     A[调用 XssValidator 类的 validate 方法] --> B[通过 Jsoup 解析 Document 对象]
-    B --> C[遍历所有 Node]
-    C --> D{当前 Node 是否为 Element?}
-    D -->|否| C
-    D -->|是| E[获取 Element 的 tagName]
-    E --> F{tagName 是否在黑名单中?}
-    F -->|是| G[将不安全元素添加至数组]
-    G --> C
-    F -->|否| H[检查标签是否存在不安全属性名]
-    H --> I{是否存在被禁止的属性名?}
-    I -->|是| G
-    I -->|否| J[验证标签值是否包含 javascript 或 alert]
-    J --> K{是否存在恶意值?}
-    K -->|是| G
-    K -->|否| L[继续遍历下一个 Node]
-    L --> C
+    B --> C[遍历所有节点]
+    C --> D[获取当前节点的 tagName]
+    D --> E{tagName 是否在黑名单中?}
+    E -->|是| F[记录不安全标签至数组]
+    E -->|否| G[检查标签是否存在不安全属性名]
+    G --> H{是否存在被禁止的属性名?}
+    H -->|是| F
+    H -->|否| I[验证标签值是否包含 javascript 或 alert]
+    I --> J{是否存在恶意值?}
+    J -->|是| F
+    J -->|否| K[继续处理下一个节点]
+    K --> C
+
 
