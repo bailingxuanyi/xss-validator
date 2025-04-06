@@ -44,19 +44,15 @@
 
 ### 6. 流程图
 ```mermaid
-graph TD
-    A[调用 XssValidator 类的 validate 方法] --> B[通过 Jsoup 解析 Document 对象]
-    B --> C[遍历所有节点]
-    C --> D[获取当前节点的 tagName]
-    D --> E{tagName 是否在黑名单中?}
-    E -->|是| F[记录不安全标签至数组]
-    E -->|否| G[检查标签是否存在不安全属性名]
-    G --> H{是否存在被禁止的属性名?}
+    A[开始] --> B[XssValidator.validate]
+    B --> C[Jsoup解析Document]
+    C --> D[遍历所有Node]
+    D --> E{标签名不安全?}
+    E -->|是| F[添加到危险节点数组]
+    E -->|否| G{属性名不安全?}
+    G -->|是| F
+    G -->|否| H{属性值含JS代码?}
     H -->|是| F
-    H -->|否| I[验证标签值是否包含 javascript 或 alert]
-    I --> J{是否存在恶意值?}
-    J -->|是| F
-    J -->|否| K[继续处理下一个节点]
-    K --> C
-
-
+    H -->|否| D
+    F --> D
+    D -->|遍历结束| I[返回危险节点数组]
