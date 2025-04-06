@@ -44,9 +44,7 @@
 
 
 
-## 3.spring bean 注入
-
-
+## 3.spring bean 容器注入及初始化
 
 ``` 
 @Configuration
