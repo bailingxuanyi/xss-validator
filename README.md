@@ -51,3 +51,24 @@
 ### 5. 检测脚本执行
 - 检查是否有 `src` 属性指向外部脚本文件（如 `.js` 文件）。
 - 检查是否有 `href` 属性指向恶意 URL。
+
+
+### 6. 流程图
+```mermaid
+flowchart TD
+    A[开始] --> B[解析HTML]
+    B --> C[遍历节点]
+    C --> D{风险标签?}
+    D -->|是| E[收集]
+    D -->|否| F{风险属性?}
+    F -->|是| E
+    F -->|否| G{风险值?}
+    G -->|是| E
+    G -->|否| C
+    E --> C
+    C -->|完成| H[返回结果]
+    
+    style A fill:#f9f,stroke:#333
+    style H fill:#f9f,stroke:#333
+    style E fill:#fcc,stroke:#f66
+```
