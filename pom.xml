@@ -75,23 +75,38 @@
         </dependency>
 
     </dependencies>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>bailingxuanyi</name>
+            <email>89206714@qq.com</email>
+            <organization>GitHub</organization>
+        </developer>
+    </developers>
+    <!-- 必须添加以下信息 -->
+    <name>xss-validator</name>
+    <description>A library for validating and sanitizing XSS (Cross-Site Scripting) attacks in Java applications.</description> <!-- 项目描述 -->
+    <url>https://github.com/bailingxuanyi/xss-validator</url> <!-- 项目主页（GitHub/GitLab 等） -->
+    <!-- SCM（源码管理，推荐） -->
+    <scm>
+        <connection>scm:git:git://github.com/bailingxuanyi/xss-validator.git</connection>
+        <developerConnection>scm:git:ssh://github.com/bailingxuanyi/xss-validator.git</developerConnection>
+        <url>https://github.com/bailingxuanyi/xss-validator</url>
+    </scm>
     <build>
         <plugins>
+            <!-- GPG 签名插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -102,7 +117,43 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- 生成 javadoc 和 sources（必须） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>

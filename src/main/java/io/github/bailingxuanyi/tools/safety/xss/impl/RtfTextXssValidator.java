@@ -118,7 +118,6 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * 验证富文本，返回不安全的标签（默认第一个）
      *
      * @param rtfContent 富文本内容
-     * @return
      */
     public Optional<UnsafeElement> validate(String rtfContent) {
         try {
@@ -320,7 +319,6 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * 判断是否为 jsFuck特征 混淆代码
      *
      * @param input
-     * @return
      */
     public static boolean containJsFuckChar(String input) {
         return StringUtils.containsAny(input, "[]()+!")
@@ -331,7 +329,6 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * 判断是否包含AAEncode特征 混淆代码
      *
      * @param input
-     * @return
      */
     public boolean containAAEncodeChar(String input) {
         return aaJsPattern.matcher(input).find();
@@ -342,7 +339,6 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * 判断是否包含JJEncode特征 混淆代码
      *
      * @param input
-     * @return
      */
     public boolean containJJEncodeChar(String input) {
         // 检查特殊字符比例
