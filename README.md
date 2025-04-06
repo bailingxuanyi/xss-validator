@@ -45,16 +45,19 @@
 ### 6. 流程图
 ```mermaid
 flowchart TD
-    A[开始] --> B[XssValidator.validate]
-    B --> C[Jsoup解析Document]
-    C --> D[遍历所有Node]
-    D --> E{标签名不安全?}
-    E -->|是| F[添加到危险节点数组]
-    E -->|否| G{属性名不安全?}
-    G -->|是| F
-    G -->|否| H{属性值含JS代码?}
-    H -->|是| F
-    H -->|否| D
-    F --> D
-    D -->|遍历结束| I[返回危险节点数组]
+    A[开始] --> B[解析HTML]
+    B --> C[遍历节点]
+    C --> D{风险标签?}
+    D -->|是| E[收集]
+    D -->|否| F{风险属性?}
+    F -->|是| E
+    F -->|否| G{风险值?}
+    G -->|是| E
+    G -->|否| C
+    E --> C
+    C -->|完成| H[返回结果]
+    
+    style A fill:#f9f,stroke:#333
+    style H fill:#f9f,stroke:#333
+    style E fill:#fcc,stroke:#f66
 ```
