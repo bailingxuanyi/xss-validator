@@ -1,6 +1,6 @@
-package cn.whatfun.tools.safety.xss.api;
+package io.github.bailingxuanyi.tools.safety.xss.api;
 
-import cn.whatfun.tools.safety.xss.api.result.UnsafeElement;
+import io.github.bailingxuanyi.tools.safety.xss.api.result.UnsafeElement;
 
 import java.util.List;
 import java.util.Optional;
