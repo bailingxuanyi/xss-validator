@@ -40,3 +40,27 @@
 ### 5. 检测脚本执行
 - 检查是否有 `src` 属性指向外部脚本文件（如 `.js` 文件）。
 - 检查是否有 `href` 属性指向恶意 URL。
+
+
+### 6. 流程图
+# XSS 验证流程图
+
+```mermaid
+graph TD
+    A[调用 XssValidator 类的 validate 方法] --> B[通过 Jsoup 解析 Document 对象]
+    B --> C[遍历所有 Node]
+    C --> D{当前 Node 是否为 Element?}
+    D -->|否| C
+    D -->|是| E[获取 Element 的 tagName]
+    E --> F{tagName 是否在黑名单中?}
+    F -->|是| G[将不安全元素添加至数组]
+    G --> C
+    F -->|否| H[检查标签是否存在不安全属性名]
+    H --> I{是否存在被禁止的属性名?}
+    I -->|是| G
+    I -->|否| J[验证标签值是否包含 javascript 或 alert]
+    J --> K{是否存在恶意值?}
+    K -->|是| G
+    K -->|否| L[继续遍历下一个 Node]
+    L --> C
+
