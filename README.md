@@ -9,9 +9,7 @@
 
 ---
 ## 快速入门
-    ```
-    [接入指南](docs/Introduce.md)   
-    ```
+   [接入指南](docs/Introduce.md)  
 ---
 
 ## 代码处理思路
