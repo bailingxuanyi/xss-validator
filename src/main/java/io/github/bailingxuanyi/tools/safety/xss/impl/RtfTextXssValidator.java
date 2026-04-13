@@ -1,10 +1,10 @@
 package io.github.bailingxuanyi.tools.safety.xss.impl;
 
 
-import io.github.bailingxuanyi.tools.safety.xss.api.XssValidator;
-import io.github.bailingxuanyi.tools.safety.xss.api.result.UnsafeElement;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import io.github.bailingxuanyi.tools.safety.xss.api.XssValidator;
+import io.github.bailingxuanyi.tools.safety.xss.api.result.UnsafeElement;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -30,26 +30,26 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * <a> <b> <div> <span> <em> <i> <p> <h1> <h2> <h3> <h4> <h5> <h6> <blockquote> <code> <pre> <ol> <ul> <li> <hr> <strong>
      *  若黑白名单一起配置，则只有白名单生效
      */
-    @Value("#{'${rtf.xss.validator.html.onlySupportedTags:}'.split(',').![trim()]}")
+    @Value("#{'${rtf.xss.validator.html.onlySupportedTags:}'.empty ? {} : '${rtf.xss.validator.html.onlySupportedTags:}'.split(',').![trim()]}")
     private Set<String> onlySupportedTags;
 
     /**
      * 富文本内容xss检测，黑名单 被禁止使用的html标签 如<svg></svg> <script></script>
      */
-    @Value("#{'${rtf.xss.validator.html.notAllowedTags:}'.split(',').![trim()]}")
+    @Value("#{'${rtf.xss.validator.html.notAllowedTags:}'.empty ? {} : '${rtf.xss.validator.html.notAllowedTags:}'.split(',').![trim()]}")
     private Set<String> notAllowedTags;
 
     /**
      * 富文本内容xss检测，被禁止使用的html标签的属性 attr_key
      */
-    @Value("#{'${rtf.xss.validator.html.notAllowedAttributes:}'.split(',').![trim()]}")
+    @Value("#{'${rtf.xss.validator.html.notAllowedAttributes:}'.empty ? {} : '${rtf.xss.validator.html.notAllowedAttributes:}'.split(',').![trim()]}")
     private Set<String> notAllowedAttrs = Sets.newHashSet();
 
     /**
      * 富文本内容xss检测，html标签属性value若包含以下关键字单词不允许落库
      * (?i)(alert|confirm|msgbox|eval|settimeout|setinterval|function|window|self|document|base64|script|newline|javascript)
      */
-    @Value("${rtf.xss.validator.html.notAllowedWords.regex.expression:(?i)(alert|confirm|msgbox|eval|settimeout|setinterval|function|window|self|document|base64|script|newline|javascript)")
+    @Value("${rtf.xss.validator.html.notAllowedWords.regex.expression:}")
     private String notAllowedAttrValueRegexExpression;
 
     /**
@@ -57,7 +57,7 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * 如<a href="javascript:alert(1)"> href 可能存在注入情况
      * 如<a src="javascript:alert(1)"> src 可能存在注入情况
      */
-    @Value("#{'${rtf.xss.validator.html.dangerousAttributes:}'.split(',').![trim()]}")
+    @Value("#{'${rtf.xss.validator.html.dangerousAttributes:}'.empty ? {} : '${rtf.xss.validator.html.dangerousAttributes:}'.split(',').![trim()]}")
     private Set<String> dangerousAttrs = Sets.newHashSet();
 
     /**
@@ -67,7 +67,7 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * <a onload='xxx', onclick='yyy'></a>
      * 会对其属性的 value xxx, yyy  进行检测
      */
-    @Value("#{'${rtf.xss.validator.html.dangerousTags:}'.split(',').![trim()]}")
+    @Value("#{'${rtf.xss.validator.html.dangerousTags:}'.empty ? {} : '${rtf.xss.validator.html.dangerousTags:}'.split(',').![trim()]}")
     private Set<String> dangerousTags = Sets.newHashSet();
 
     /**
@@ -164,6 +164,11 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
                         unsafeElements.offer(new UnsafeElement(element, i));
                     }
                 }
+            }
+
+            @Override
+            public void tail(Node node, int i) {
+                //
             }
         });
         return Lists.newArrayList(unsafeElements);
