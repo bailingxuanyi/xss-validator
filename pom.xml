@@ -141,10 +141,11 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.7.0</version>
+                <version>0.8.0</version> <!-- 建议使用 >=0.8.0 的版本 -->
                 <extensions>true</extensions>
                 <configuration>
-                    <publishingServerId>central</publishingServerId>
+                    <publishingServerId>central</publishingServerId> <!-- 与 settings.xml 中的 server id 保持一致 -->
+                    <autoPublish>true</autoPublish> <!-- 自动发布，跳过手动确认步骤 -->
                 </configuration>
             </plugin>
             <plugin>
@@ -162,4 +163,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>
