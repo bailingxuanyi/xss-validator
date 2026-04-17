@@ -49,7 +49,7 @@ public class RtfTextXssValidator implements XssValidator, InitializingBean {
      * 富文本内容xss检测，html标签属性value若包含以下关键字单词不允许落库
      * (?i)(alert|confirm|msgbox|eval|settimeout|setinterval|function|window|self|document|base64|script|newline|javascript)
      */
-    @Value("${rtf.xss.validator.html.notAllowedWords.regex.expression:}")
+    @Value("${rtf.xss.validator.html.notAllowedWords.regex.expression:(?i)(alert|confirm|msgbox|eval|settimeout|setinterval|function|window|self|document|base64|script|newline|javascript)}")
     private String notAllowedAttrValueRegexExpression;
 
     /**
