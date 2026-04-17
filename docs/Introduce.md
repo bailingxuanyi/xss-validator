@@ -4,7 +4,7 @@
 <dependency>
    <groupId>io.github.bailingxuanyi</groupId>
    <artifactId>xss-validator</artifactId>
-   <version>1.0.2-RELEASE</version>
+   <version>1.0.3-RELEASE</version>
 </dependency>
 
 ```
